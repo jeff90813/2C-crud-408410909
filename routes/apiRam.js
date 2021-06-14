@@ -124,5 +124,21 @@ router.post('/update', async function (req, res, next) {
   }
 });
 
+// delete book
+router.delete('/delete/:id', async function (req, res, next) {
+  let id = req.params.id;
+
+  try {
+    // await db.query('DELETE FROM books WHERE id = ?', [id]);
+    const response = await fetch(`http://localhost:1337/rams/${id}`, {
+      method: 'delete',
+    });
+    const data = await response.json();
+  } catch (err) {
+    console.log(err);
+  }
+  res.redirect('/crud_ram');
+});
+
 
 module.exports = router;
