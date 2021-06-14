@@ -66,7 +66,63 @@ router.post('/add', async function (req, res, next) {
   }
 });
 
+// display edit book page
+router.get('/edit/:id', async function (req, res, next) {
+  // res.send('display edit book page');
+  const id = req.params.id;
+  try {
+    // const [rows] = await db.query('SELECT * FROM books WHERE id = ?', [id]);
+    const response = await fetch(`http://localhost:1337/rams/${id}`);
+    const data = await response.json();
+    res.render('crud_ram/edit', {
+      id: data.id,
+      name: data.name,
+      clock_rate: data.clock_rate,
+      size: data.size,
+      image_url: data.image_url,
+      ram_ID: data.ram_ID
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
 
+// update book data
+router.post('/update', async function (req, res, next) {
+  // res.send('update book data');
+  const id = req.body.id;
+  const name = req.body.name;
+  const clock_rate = req.body.clock_rate;
+  const size = req.body.size;
+  const image_url = req.body.image_url;
+  const ram_ID = req.body.ram_ID;
+  console.log(name, clock_rate, size, image_url, ram_ID,id);
+
+  const form_data = {
+    name,
+    clock_rate,
+    size, 
+    image_url, 
+    ram_ID,
+  };
+  try {
+    const response = await fetch(`http://localhost:1337/rams/${id}`, {
+      method: 'put',
+      body: JSON.stringify(form_data), 
+      headers: { 'Content-Type': 'application/json' },
+    });
+    const data = await response.json();
+    // await db.query('UPDATE books SET name = ?, author = ? WHERE id = ?', [
+    //   name,
+    //   author,
+    //   id,
+    // ]);
+    // res.status(200).json({ message: 'Updating successful' });
+    res.redirect('/crud_ram');
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 
 module.exports = router;
