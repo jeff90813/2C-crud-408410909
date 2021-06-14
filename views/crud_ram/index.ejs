@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Ram</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div class="container" style="margin-top: 50px">
+      <div class="card">
+        <div class="card-header">
+          <ul class="nav nav-pills w-100">
+            <li class="nav-pill active">
+              <a class="nav-link">Ram</a>
+            </li>
+            <li class="nav-pill ml-auto">
+              <a class="nav-link active" href="/crud_ram/add">Add Ram</a>
+            </li>
+          </ul>
+        </div>
+        <div class="card-body">
+          <% if(data.length) { %>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Clock_rate</th>
+                <th scope="col">Size</th>
+                <th scope="col">Image_url</th>
+                <th scope="col">Ram_id</th>
+                <th width="200px">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for(var i = 0; i< data.length; i++) { %>
+              <tr>
+                <th scope="row"><%= (i+1) %></th>
+                <td><%= data[i].name%></td>
+                <td><%= data[i].clock_rate%></td>
+                <td><%= data[i].size%></td>
+                <td><%= data[i].image_url%></td>
+                <td><%= data[i].ram_ID%></td>
+                <td>
+                  <a
+                    class="btn btn-success edit"
+                    href="/crud_ram/edit/<%=data[i].id%>"
+                    >Edit</a
+                  >
+                  <a
+                    class="btn btn-danger delete"
+                    onclick="return alert('Are You sure?')"
+                    href="/crud_ram/delete/<%=data[i].id%>"
+                    >Delete</a
+                  >
+                </td>
+              </tr>
+              <% } %>
+            </tbody>
+          </table>
+          <% } %>
+
+          <!-- if result is empty -->
+          <% if(!data.length) { %>
+          <p class="text-center">No Ram found!</p>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
