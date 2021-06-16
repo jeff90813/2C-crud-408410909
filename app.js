@@ -11,8 +11,8 @@ var db = require('./lib/db');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var booksRouter = require('./routes/books');
-var apiRouter = require('./routes/apiRam');
+var fetchRouter = require('./routes/fetchRam');
+var sqlRouter = require('./routes/sqlRam');
 
 var app = express();
 
@@ -28,8 +28,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/books', booksRouter);
-app.use('/crud_ram', apiRouter);
+app.use('/fetchram', fetchRouter);
+app.use('/sqlram', sqlRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

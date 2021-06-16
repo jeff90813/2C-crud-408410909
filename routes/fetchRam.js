@@ -5,7 +5,7 @@ const router = express.Router();
 router.get('/', async function (req, res, next) {
   let data;
   try {
-    const response = await fetch('http://localhost:1337/rams');
+    const response = await fetch('https://g10-project2.herokuapp.com/rams');
     const data = await response.json();
     // const [rows] = await db.query('SELECT * FROM books ORDER BY id desc');
     // data = rows;
@@ -47,7 +47,7 @@ router.post('/add', async function (req, res, next) {
 
   try {
     // await db.query('INSERT INTO books SET ?', form_data);
-    const response = await fetch('http://localhost:1337/rams', {
+    const response = await fetch('https://g10-project2.herokuapp.com/rams', {
       method: 'post',
       body: JSON.stringify(form_data), 
       headers: { 'Content-Type': 'application/json' },
@@ -72,7 +72,7 @@ router.get('/edit/:id', async function (req, res, next) {
   const id = req.params.id;
   try {
     // const [rows] = await db.query('SELECT * FROM books WHERE id = ?', [id]);
-    const response = await fetch(`http://localhost:1337/rams/${id}`);
+    const response = await fetch(`https://g10-project2.herokuapp.com/rams/${id}`);
     const data = await response.json();
     res.render('crud_ram/edit', {
       id: data.id,
@@ -106,7 +106,7 @@ router.post('/update', async function (req, res, next) {
     ram_ID,
   };
   try {
-    const response = await fetch(`http://localhost:1337/rams/${id}`, {
+    const response = await fetch(`https://g10-project2.herokuapp.com/rams/${id}`, {
       method: 'put',
       body: JSON.stringify(form_data), 
       headers: { 'Content-Type': 'application/json' },
@@ -130,7 +130,7 @@ router.delete('/delete/:id', async function (req, res, next) {
 
   try {
     // await db.query('DELETE FROM books WHERE id = ?', [id]);
-    const response = await fetch(`http://localhost:1337/rams/${id}`, {
+    const response = await fetch(`https://g10-project2.herokuapp.com/rams/${id}`, {
       method: 'delete',
     });
     const data = await response.json();
